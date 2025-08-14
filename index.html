@@ -221,6 +221,7 @@ anotherTxn();
 
   async function eject(){
     state='EXIT'; keypad.innerHTML=''; menu.style.display='none'; setYN(false);
+    pin = '';
     await typeMessage(['Please take your card','Thank you for using Touchless Bank']);
     setTimeout(showWelcome, 1300);
   }
@@ -329,7 +330,11 @@ anotherTxn();
         }
         else if(yn.style.display==='flex' && (txt==='YES' || txt==='NO')){
           setYN(false);
-          if(txt==='YES') showMenu(); else eject();
+          if(txt==='YES') showMenu(); 
+          else {
+            pin = '';
+            eject();
+          }
         }
         dwellStart = performance.now() + 1e9; // prevent repeat
         beep(880,60);
